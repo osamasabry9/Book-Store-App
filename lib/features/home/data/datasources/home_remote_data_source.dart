@@ -16,8 +16,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<BookEntity>> fetchFeaturedBooks() async {
-    var data = await apiService.getBooks(
-        endpoint: fetchFeaturedBooksUrl);
+    var data = await apiService.getBooks(endpoint: fetchFeaturedBooksUrl);
+    List<BookEntity> books = getBooksList(data);
+    return books;
+  }
+
+  @override
+  Future<List<BookEntity>> fetchNewestBooks() async {
+    var data = await apiService.getBooks(endpoint: fetchNewestBooksUrl);
     List<BookEntity> books = getBooksList(data);
     return books;
   }
@@ -28,11 +34,5 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       books.add(BookModel.fromJson(bookMap));
     }
     return books;
-  }
-
-  @override
-  Future<List<BookEntity>> fetchNewestBooks() {
-    // TODO: implement fetchNewestBooks
-    throw UnimplementedError();
   }
 }
