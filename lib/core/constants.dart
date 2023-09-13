@@ -6,3 +6,4 @@ const kGtSectraFine = 'GT Sectra Fine';
 const String fetchFeaturedBooksUrl = 'volumes?q=computer science';
 const String fetchNewestBooksUrl = 'volumes?Sorting=newest&q=computer science';
 const String kFeaturedBox = 'featured_box'; 
+const String kNewestBox = 'newest_box';
