@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../domain/entities/book_entity.dart';
@@ -7,11 +8,11 @@ import '../datasources/home_local_data_source.dart';
 import '../datasources/home_remote_data_source.dart';
 
 class HomeRepositoryImpl extends HomeRepository {
-  final HomeRemoteDataSource remoteDataSource;
-  final HomeLocalDataSource localDataSource;
-
   HomeRepositoryImpl(
       {required this.remoteDataSource, required this.localDataSource});
+
+  final HomeLocalDataSource localDataSource;
+  final HomeRemoteDataSource remoteDataSource;
 
   @override
   Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks() async {
@@ -24,7 +25,10 @@ class HomeRepositoryImpl extends HomeRepository {
       booksList = await remoteDataSource.fetchFeaturedBooks();
       return Right(booksList);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      if (e is DioException) {
+        return left(ServerFailure.fromDiorError(e));
+      }
+      return left(ServerFailure(e.toString()));
     }
   }
 
@@ -39,7 +43,10 @@ class HomeRepositoryImpl extends HomeRepository {
       booksList = await remoteDataSource.fetchNewestBooks();
       return Right(booksList);
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      if (e is DioException) {
+        return left(ServerFailure.fromDiorError(e));
+      }
+      return left(ServerFailure(e.toString()));
     }
   }
 }
