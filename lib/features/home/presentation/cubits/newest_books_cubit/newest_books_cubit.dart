@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bookly/features/home/domain/usecases/fetch_newest_books_use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
