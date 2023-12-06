@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/build_error_snack_bar_widget.dart';
 import '../../domain/entities/book_entity.dart';
-import 'featured_list_view.dart';
+import 'featured_books_list_view.dart';
+import 'featured_books_list_view_loading_indicator.dart';
 
 class FeaturedBooksListViewBlocConsumer extends StatefulWidget {
   const FeaturedBooksListViewBlocConsumer({
@@ -41,7 +42,7 @@ class _FeaturedBooksListViewBlocConsumerState
         } else if (state is FeaturedBooksFailure) {
           return Text(state.errorMessage);
         } else {
-          return const CircularProgressIndicator();
+          return const FeaturedBooksListViewLoadingIndicator();
         }
       },
     );
