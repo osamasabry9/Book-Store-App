@@ -9,16 +9,25 @@ part 'newest_books_state.dart';
 
 class NewestBooksCubit extends Cubit<NewestBooksState> {
   final FetchNewestBooksUseCase fetchNewestBooksUseCase;
-  NewestBooksCubit(this.fetchNewestBooksUseCase)
-      : super(NewestBooksInitial());
+  NewestBooksCubit(this.fetchNewestBooksUseCase) : super(NewestBooksInitial());
 
-  Future<void> fetchNewestBooks() async {
-    emit(NewestBooksLoading());
+  Future<void> fetchNewestBooks({int pageNumber = 0}) async {
+    if (pageNumber == 0) {
+      emit(NewestBooksLoading());
+    } else {
+      emit(NewestBooksPaginationLoading());
+    }
 
     Either<Failure, List<BookEntity>> result =
-        await fetchNewestBooksUseCase.call();
+        await fetchNewestBooksUseCase.call(pageNumber);
     result.fold(
-      (failure) => emit(NewestBooksFailure(failure.message)),
+      (failure) {
+        if (pageNumber == 0) {
+          emit(NewestBooksFailure(failure.message));
+        } else {
+          emit(NewestBooksPaginationFailure(failure.message));
+        }
+      },
       (books) => emit(NewestBooksSuccess(books)),
     );
   }

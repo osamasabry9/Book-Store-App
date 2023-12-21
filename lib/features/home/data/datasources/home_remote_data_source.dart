@@ -7,7 +7,7 @@ import '../models/book_model/book_model.dart';
 abstract class HomeRemoteDataSource {
   Future<List<BookEntity>> fetchFeaturedBooks({int pageNumber = 0});
 
-  Future<List<BookEntity>> fetchNewestBooks();
+  Future<List<BookEntity>> fetchNewestBooks({int pageNumber = 0});
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -17,15 +17,17 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<List<BookEntity>> fetchFeaturedBooks({int pageNumber = 0}) async {
-    var data = await apiService.getBooks(endpoint: "$fetchFeaturedBooksUrl&startIndex=${pageNumber*10}");
+    var data = await apiService.getBooks(
+        endpoint: "$fetchFeaturedBooksUrl&startIndex=${pageNumber * 10}");
     List<BookEntity> books = getBooksList(data);
     saveBooksData(books, kFeaturedBox);
     return books;
   }
 
   @override
-  Future<List<BookEntity>> fetchNewestBooks() async {
-    var data = await apiService.getBooks(endpoint: fetchNewestBooksUrl);
+  Future<List<BookEntity>> fetchNewestBooks({int pageNumber = 0}) async {
+    var data = await apiService.getBooks(
+        endpoint: "$fetchNewestBooksUrl&startIndex=${pageNumber * 10}");
     List<BookEntity> books = getBooksList(data);
     saveBooksData(books, kNewestBox);
     return books;

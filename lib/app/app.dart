@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               FetchNewestBooksUseCase(
                 di.instance.get<HomeRepositoryImpl>(),
               ),
-            );
+        )..fetchNewestBooks();
           },
         )
       ],
