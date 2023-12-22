@@ -1,3 +1,4 @@
+import 'package:bookly/features/home/domain/entities/book_entity.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/Splash/presentation/views/splash_view.dart';
@@ -26,7 +27,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kBookDetailsView,
-        builder: (context, state) => const BookDetailsView(),
+        builder: (context, state) {
+      final book = state.extra as BookEntity ;
+          return  BookDetailsView(book: book,);
+        },
       ),
     ],
   );

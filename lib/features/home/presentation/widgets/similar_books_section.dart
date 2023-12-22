@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/styles.dart';
+import '../../domain/entities/book_entity.dart';
 import 'similar_books_list_view.dart';
 
 class SimilarBooksSection extends StatelessWidget {
-  const SimilarBooksSection({super.key});
+  final BookEntity book;
+  const SimilarBooksSection({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,9 @@ class SimilarBooksSection extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        const SimilarBooksListView(),
+        SimilarBooksListView(
+          book: book,
+        ),
       ],
     );
   }
