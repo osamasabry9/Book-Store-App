@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/styles.dart';
-import '../../../../core/constants.dart';
+import '../../../../core/constants/constants.dart';
 import 'book_rating.dart';
 
 class BookListViewItem extends StatelessWidget {

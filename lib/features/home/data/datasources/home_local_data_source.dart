@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../../../../core/constants.dart';
+import '../../../../core/constants/constants.dart';
 import '../../domain/entities/book_entity.dart';
 
 abstract class HomeLocalDataSource {

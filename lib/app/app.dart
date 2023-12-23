@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../core/constants.dart';
+import '../core/constants/constants.dart';
 import '../core/utils/app_router.dart';
 import '../features/home/domain/usecases/fetch_featured_books_use_case.dart';
 import 'di.dart' as di;
